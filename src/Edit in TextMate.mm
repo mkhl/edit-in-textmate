@@ -264,6 +264,6 @@ struct PBX_SelectionRange
 	FailedFiles = [NSMutableSet new];
 //	NSString* bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
 	if([[NSUserDefaults standardUserDefaults] boolForKey:@"DisableEditInTextMateMenuItem"] == NO)
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(installMenuItem:) name:NSApplicationDidFinishLaunchingNotification object:[NSApplication sharedApplication]];
+		[self installMenuItem:NSApp];
 }
 @end
