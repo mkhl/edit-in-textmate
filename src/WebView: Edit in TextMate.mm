@@ -311,7 +311,7 @@ static DOMHTMLTextAreaElement* find_active_text_area (WebView* view)
 
 		if(selection)
 		{
-			str = convert_dom_to_text([[[self mainFrame] DOMDocument] createTreeWalker:selection :DOM_SHOW_ALL :nil :YES]);
+			str = convert_dom_to_text([[[self mainFrame] DOMDocument] createTreeWalker:selection whatToShow:DOM_SHOW_ALL filter:nil expandEntityReferences:YES]);
 			while([str hasSuffix:@"\n\n"])
 				str = [str substringToIndex:[str length]-1];
 

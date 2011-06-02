@@ -20,7 +20,6 @@ static NSMutableDictionary* OpenFiles;
 static NSMutableSet* FailedFiles;
 static NSString* TextMateBundleIdentifier = @"com.macromates.textmate";
 
-#pragma options align=mac68k
 struct PBX_SelectionRange
 {
 	short unused1;		// 0 (not used)
@@ -30,7 +29,6 @@ struct PBX_SelectionRange
 	long unused2;		// 0 (not used)
 	long theDate;		// modification date/time
 };
-#pragma options align=reset
 
 @implementation EditInTextMate
 + (void)setODBEventHandlers
@@ -218,7 +216,7 @@ struct PBX_SelectionRange
 	}
 	else
 	{
-		[[NSFileManager defaultManager] removeFileAtPath:fileName handler:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:fileName error:nil];
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	}
 
@@ -253,7 +251,7 @@ struct PBX_SelectionRange
 	if(NSMenu* editMenu = [self findEditMenu])
 	{
 		[editMenu addItem:[NSMenuItem separatorItem]];
-		id <NSMenuItem> menuItem = [editMenu addItemWithTitle:[NSString stringWithUTF8String:"Edit in TextMate…"] action:@selector(editInTextMate:) keyEquivalent:@"e"];
+		NSMenuItem *menuItem = [editMenu addItemWithTitle:[NSString stringWithUTF8String:"Edit in TextMate…"] action:@selector(editInTextMate:) keyEquivalent:@"e"];
 		[menuItem setKeyEquivalentModifierMask:NSControlKeyMask | NSCommandKeyMask];
 	}
 }
